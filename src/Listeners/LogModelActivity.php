@@ -15,6 +15,11 @@ class LogModelActivity
             return;
         }
 
+        // Ignore events from the ActivityLog model itself to prevent an infinite loop
+        if ($model instanceof \Sagor\ActivityLog\Models\ActivityLog) {
+            return;
+        }
+
         $modelName = class_basename($model);
 
         activity()
