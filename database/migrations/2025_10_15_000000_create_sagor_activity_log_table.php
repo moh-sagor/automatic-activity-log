@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('sagor_activity_log', function (Blueprint $table) {
             $table->id();
             $table->nullableMorphs('causer');
-            $table->string('activity_type');
+            $table->string('action_type')->comment('e.g., created, updated, deleted');
             $table->longText('description');
-            $table->nullableMorphs('subject');
+            $table->nullableMorphs('affected_model');
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->string('url')->nullable();

@@ -12,10 +12,10 @@ class ActivityLog extends Model
     protected $fillable = [
         'causer_id',
         'causer_type',
-        'activity_type',
+        'action_type',
         'description',
-        'subject_id',
-        'subject_type',
+        'affected_model_id',
+        'affected_model_type',
         'ip_address',
         'user_agent',
         'url',
@@ -27,7 +27,7 @@ class ActivityLog extends Model
         return $this->morphTo();
     }
 
-    public function subject(): MorphTo
+    public function affectedModel(): MorphTo
     {
         return $this->morphTo();
     }

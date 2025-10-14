@@ -10,8 +10,8 @@ use Sagor\ActivityLog\Models\ActivityLog;
 class ActivityLogger
 {
     protected ?Model $causer = null;
-    protected ?Model $subject = null;
-    protected ?string $type = null;
+    protected ?Model $affectedModel = null;
+    protected ?string $actionType = null;
     protected array $properties = [];
 
     public function causedBy(?Model $causer): self
@@ -20,15 +20,15 @@ class ActivityLogger
         return $this;
     }
 
-    public function performedOn(?Model $subject): self
+    public function on(?Model $affectedModel): self
     {
-        $this->subject = $subject;
+        $this->affectedModel = $affectedModel;
         return $this;
     }
 
-    public function withType(string $type): self
+    public function withActionType(string $actionType): self
     {
-        $this->type = $type;
+        $this->actionType = $actionType;
         return $this;
     }
 
@@ -44,14 +44,14 @@ class ActivityLogger
 
         $log = new ActivityLog();
         $log->description = $description;
-        $log->activity_type = $this->type;
+        $log->action_type = $this->actionType;
 
         if ($causer) {
             $log->causer()->associate($causer);
         }
 
-        if ($this->subject) {
-            $log->subject()->associate($this->subject);
+        if ($this->affectedModel) {
+            $log->affectedModel()->associate($this->affectedModel);
         }
 
         $log->ip_address = $this->properties['ip_address'] ?? Request::ip();

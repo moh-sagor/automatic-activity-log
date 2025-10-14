@@ -9,7 +9,7 @@ class LogModelActivity
 {
     public function handle(string $eventName, array $data): void
     {
-        [$event, $model] = $this->parseEvent($eventName);
+        [$action, $model] = $this->parseEvent($eventName, $data);
 
         if (!$model instanceof Model) {
             return;
@@ -19,23 +19,20 @@ class LogModelActivity
 
         activity()
             ->causedBy(Auth::user())
-            ->performedOn($model)
-            ->withType('model')
-            ->log("Model {$modelName} was {$event}");
+            ->on($model)
+            ->withActionType($action)
+            ->log("The {$modelName} model was {$action}");
     }
 
-    protected function parseEvent(string $eventName): array
+    protected function parseEvent(string $eventName, array $data): array
     {
-        $parts = explode(': ', $eventName);
-        $event = explode('.', $parts[0])[1]; // eloquent.created -> created
-        $model = $parts[1] ?? null;
+        // eventName is like 'eloquent.created: App\Models\User'
+        $action = explode('.', $eventName)[1]; // created, updated, deleted
+        $action = explode(':', $action)[0];
 
-        // The event payload for `eloquent.*` contains the model instance
-        // but we receive it as an argument in the handle method from the service provider.
-        // This logic assumes the service provider correctly passes the model.
-        // We will get the model instance from the data array.
         $modelInstance = $data[0] ?? null;
 
-        return [$event, $modelInstance];
+        return [$action, $modelInstance];
     }
 }
+
