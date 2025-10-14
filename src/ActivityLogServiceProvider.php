@@ -47,8 +47,8 @@ class ActivityLogServiceProvider extends ServiceProvider
         Event::listen('eloquent.restored: *', [LogModelActivity::class, 'handle']);
 
         // HTTP Request Event (Laravel 5.4+)
-        if (class_exists(RequestHandled::class)) {
-            Event::listen(RequestHandled::class, [LogHttpActivity::class, 'handle']);
-        }
+        // if (class_exists(RequestHandled::class)) {
+        //     Event::listen(RequestHandled::class, [LogHttpActivity::class, 'handle']);
+        // }
     }
 }
