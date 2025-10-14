@@ -1,15 +1,17 @@
 {
     "name": "sagor/activity-log",
-    "description": "A simple package to log user activities in Laravel.",
+    "description": "A simple but powerfull package to log user activities in Laravel.",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Sagor",
-            "email": "sagor@example.com"
+            "name": "Md Sagor Hossain",
+            "email": "sagorhassain4@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
+    "keywords": ["laravel", "github", "ActivityLog", "git", "artisan"],
+    "homepage": "https://github.com/moh-sagor/automatic-activity-log",
     "require": {
         "php": ">=7.2",
         "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
