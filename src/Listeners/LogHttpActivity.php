@@ -19,7 +19,7 @@ class LogHttpActivity
 
         activity()
             ->causedBy(Auth::user())
-            ->withType('http')
+            ->withActionType('http')
             ->withProperties([
                 'url' => $request->fullUrl(),
                 'method' => $method,

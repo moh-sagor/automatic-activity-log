@@ -26,7 +26,7 @@ class LogAuthActivity
     {
         activity()
             ->causedBy($event->user)
-            ->withType('auth')
+            ->withActionType('auth')
             ->log('User logged in');
     }
 
@@ -38,7 +38,7 @@ class LogAuthActivity
 
         activity()
             ->causedBy($event->user)
-            ->withType('auth')
+            ->withActionType('auth')
             ->log('User logged out');
     }
 }
