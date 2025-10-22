@@ -42,7 +42,7 @@ The package automatically provides a migration. Run:
 php artisan migrate
 ```
 
-This will create a table called `sagor_activity_log` with the following structure:
+This will create a table called `automatic_activity_log` with the following structure:
 
 | Column              | Type      | Description                                                 |
 | ------------------- | --------- | ----------------------------------------------------------- |
@@ -68,7 +68,7 @@ The package automatically listens to Laravel events:
 * `Illuminate\Auth\Events\Login` & `Logout` → logs authentication events
 * `Illuminate\Foundation\Http\Events\RequestHandled` → logs `POST`, `PUT`, `PATCH`, `DELETE` requests
 
-All activities are stored automatically in the `sagor_activity_log` table. **No manual calls needed.**
+All activities are stored automatically in the `automatic_activity_log` table. **No manual calls needed.**
 
 ---
 
@@ -108,7 +108,7 @@ activity()
 * HTTP requests that modify data
 
 4. Optionally, log custom actions using `activity()` helper
-5. Check the `sagor_activity_log` table for logs
+5. Check the `automatic_activity_log` table for logs
 
 **No additional configuration is needed.** Just install, migrate, and it works.
 
@@ -121,7 +121,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 Route::get('/activity-log', function (Request $request) {
-    $query = DB::table('sagor_activity_log')->orderBy('created_at', 'desc');
+    $query = DB::table('automatic_activity_log')->orderBy('created_at', 'desc');
 
     // Apply search filter if provided
     if ($request->filled('search')) {

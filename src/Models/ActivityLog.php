@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class ActivityLog extends Model
 {
-    protected $table = 'sagor_activity_log';
+    protected $table = 'automatic_activity_log';
 
     protected $fillable = [
         'causer_id',

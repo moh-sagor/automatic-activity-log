@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sagor_activity_log', function (Blueprint $table) {
+        Schema::create('automatic_activity_log', function (Blueprint $table) {
             $table->id();
             $table->nullableMorphs('causer');
             $table->string('action_type')->comment('e.g., created, updated, deleted');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sagor_activity_log');
+        Schema::dropIfExists('automatic_activity_log');
     }
 };
