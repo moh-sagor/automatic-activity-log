@@ -16,7 +16,9 @@ return new class extends Migration
             $table->nullableMorphs('causer');
             $table->string('action_type')->comment('e.g., created, updated, deleted');
             $table->longText('description');
-            $table->nullableMorphs('affected_model');
+            $table->string('affected_model_type')->nullable();
+            $table->unsignedBigInteger('affected_model_id')->nullable();
+            $table->index(['affected_model_type', 'affected_model_id'], 'activity_log_affected_idx');
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->string('url')->nullable();
